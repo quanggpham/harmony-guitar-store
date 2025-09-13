@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Harmony Music Store — Cửa hàng nhạc cụ</title>
+    <meta name="description" content="Cửa hàng nhạc cụ — Guitar, Piano, Trống, Phụ kiện. Giao hàng nhanh, bảo hành chính hãng." />
+    <style>
+        :root{
+            --bg:#0f1220;
+            --card:#171a2b;
+            --muted:#98a2b3;
+            --text:#e6e9ef;
+            --brand:#7c5cff;
+            --brand-2:#05c3dd;
+            --accent:#ffd166;
+            --ok:#22c55e;
+            --danger:#ef4444;
+            --radius:14px;
+            --shadow: 0 10px 30px rgba(0,0,0,.25);
+            --shadow-soft: 0 6px 20px rgba(0,0,0,.18);
+            --maxw: 1100px;
+        }
+        *{box-sizing:border-box}
+        html,body{margin:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.15), transparent 60%), radial-gradient(900px 500px at 0% 10%, rgba(5,195,221,.12), transparent 55%), var(--bg); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; line-height:1.55}
+        a{color:inherit;text-decoration:none}
+        img{max-width:100%;display:block}
+        .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+        /* Header */
+        header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(140%) blur(8px); background:rgba(15,18,32,.6); border-bottom:1px solid rgba(255,255,255,.06)}
+        .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+        .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.3px}
+        .logo{width:36px; height:36px; display:grid; place-items:center; border-radius:10px; background: conic-gradient(from 210deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow-soft)}
+        .logo span{font-size:18px}
+        .menu{display:flex; gap:18px; align-items:center}
+        .menu a{padding:8px 10px; color:var(--muted)}
+        .menu a:hover{color:var(--text)}
+        .btn{display:inline-block; padding:10px 16px; border-radius:10px; background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#0f1020; font-weight:700; box-shadow: var(--shadow); border:none; cursor:pointer}
+        .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.15)}
+        .mobile-toggle{display:none; background:transparent; border:1px solid rgba(255,255,255,.15); color:var(--text); padding:8px 10px; border-radius:10px}
+        @media (max-width:840px){
+            .menu{display:none}
+            .mobile-toggle{display:inline-block}
+            .mobile-menu{display:none; padding:10px 0 16px; border-top:1px solid rgba(255,255,255,.06)}
+            .mobile-menu a{display:block; padding:10px 0; color:var(--muted)}
+            .mobile-menu a:hover{color:var(--text)}
+            .mobile-menu.open{display:block}
+        }
+        /* Hero */
+        .hero{padding:72px 0 36px}
+        .hero-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:26px}
+        @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
+        .badge{display:inline-flex; align-items:center; gap:10px; padding:6px 10px; border:1px solid rgba(255,255,255,.14); color:var(--muted); border-radius:999px; margin-bottom:14px; background:rgba(255,255,255,.03)}
+        .title{font-size: clamp(28px, 4.2vw, 44px); line-height:1.14; margin:0 0 12px; font-weight:800}
+        .subtitle{color:var(--muted); margin:0 0 22px}
+        .cta{display:flex; gap:12px; flex-wrap:wrap}
+        .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:18px; border-radius:var(--radius); box-shadow: var(--shadow-soft)}
+        .hero-mock{aspect-ratio: 16/10; border-radius:12px; background:linear-gradient(135deg, rgba(124,92,255,.18), rgba(5,195,221,.18)); display:grid; place-items:center; color:#0f1020; font-weight:800; font-size:22px; position:relative; overflow:hidden}
+        .hero-mock::after{content: "🎸 🎹 🥁 🎷 🎤"; position:absolute; inset:0; display:grid; place-items:center; font-size: clamp(40px, 7vw, 72px); opacity:.15}
+        .trust{display:flex; gap:18px; align-items:center; flex-wrap:wrap; color:var(--muted); font-size:14px}
+        .stars{color:#ffd166}
+        /* Sections */
+        section{padding:36px 0}
+        .section-title{font-size:22px; font-weight:800; margin:0 0 18px}
+        .muted{color:var(--muted)}
+        /* Categories */
+        .grid{display:grid; gap:16px}
+        .grid.cols-4{grid-template-columns: repeat(4, 1fr)}
+        .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+        @media (max-width:900px){ .grid.cols-4, .grid.cols-3{grid-template-columns: repeat(2, 1fr)} }
+        @media (max-width:560px){ .grid.cols-4, .grid.cols-3{grid-template-columns: 1fr} }
+        .card{background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:16px; box-shadow: var(--shadow-soft)}
+        .cat{display:flex; align-items:center; gap:14px}
+        .cat .icon{width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:rgba(255,255,255,.06); font-size:22px}
+        .card h3{margin:0 0 6px; font-size:18px}
+        /* Products */
+        .product{display:flex; gap:14px}
+        .product .thumb{width:84px; height:84px; border-radius:12px; background:linear-gradient(135deg, rgba(124,92,255,.25), rgba(5,195,221,.25)); flex:0 0 auto}
+        .price{font-weight:800}
+        .tag{display:inline-block; font-size:12px; color:#0f1020; background:var(--accent); padding:4px 8px; border-radius:999px; margin-left:8px}
+        /* Testimonials */
+        .quote{font-style:italic}
+        /* Newsletter */
+        .newsletter{display:flex; gap:10px; flex-wrap:wrap}
+        .input{flex:1; min-width:240px; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); color:var(--text)}
+        /* Footer */
+        footer{padding:26px 0 50px; color:var(--muted); border-top:1px solid rgba(255,255,255,.08)}
+        .foot{display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+        .links{display:flex; gap:16px; flex-wrap:wrap}
+        .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:14px}
+        /* Utilities */
+        .sep{height:1px; background:linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.14), rgba(255,255,255,.06)); margin:28px 0}
+        .kpi{display:flex; gap:14px; flex-wrap:wrap}
+        .kpi .pill{background:rgba(124,92,255,.12); color:#d7d2ff; border-color:rgba(124,92,255,.25)}
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="nav">
+            <a href="#" class="brand">
+                <div class="logo"><span>♫</span></div>
+                Harmony Music Store
+            </a>
+            <nav class="menu">
+                <a href="#categories">Danh mục</a>
+                <a href="#featured">Sản phẩm</a>
+                <a href="#reviews">Đánh giá</a>
+                <a href="#contact">Liên hệ</a>
+                <a class="btn" href="#featured">Mua ngay</a>
+            </nav>
+            <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">Menu</button>
+        </div>
+        <div class="mobile-menu container">
+            <a href="#categories" onclick="closeMenu()">Danh mục</a>
+            <a href="#featured" onclick="closeMenu()">Sản phẩm</a>
+            <a href="#reviews" onclick="closeMenu()">Đánh giá</a>
+            <a href="#contact" onclick="closeMenu()">Liên hệ</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <div class="badge">★ Giao hàng 2h tại Hà Nội • Đổi trả 7 ngày</div>
+                <h1 class="title">Khơi nguồn cảm hứng âm nhạc với nhạc cụ chính hãng</h1>
+                <p class="subtitle">Guitar, Piano, Trống, Micro và hơn thế nữa — bảo hành chính hãng, tư vấn 1-1 từ nghệ sĩ.</p>
+                <div class="cta">
+                    <a class="btn" href="#featured">Khám phá sản phẩm</a>
+                    <a class="btn ghost" href="#categories">Xem danh mục</a>
+                </div>
+                <div class="sep"></div>
+                <div class="trust">
+                    <div class="stars">★★★★★</div>
+                    <div>4.9/5 từ 1,200+ khách hàng</div>
+                    <div class="kpi">
+                        <span class="pill">Chuẩn âm <strong>Studio</strong></span>
+                        <span class="pill">Trả góp <strong>0%</strong></span>
+                        <span class="pill">Miễn phí <strong>Setup</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-mock">Harmony Music Store</div>
+                <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+                    <span class="pill">🎸 Fender • Yamaha • Taylor</span>
+                    <span class="pill">🎹 Korg • Roland • Casio</span>
+                    <span class="pill">🥁 Pearl • Tama • Zildjian</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories">
+        <div class="container">
+            <h2 class="section-title">Danh mục nổi bật</h2>
+            <p class="muted" style="margin-top:-6px">Chọn theo sở thích và thể loại nhạc bạn yêu.</p>
+            <div class="grid cols-4" style="margin-top:16px">
+                <div class="card cat">
+                    <div class="icon">🎸</div>
+                    <div>
+                        <h3>Guitar</h3>
+                        <div class="muted">Acoustic • Electric • Classical</div>
+                    </div>
+                </div>
+                <div class="card cat">
+                    <div class="icon">🎹</div>
+                    <div>
+                        <h3>Piano & Keyboard</h3>
+                        <div class="muted">Digital • Upright • Synth</div>
+                    </div>
+                </div>
+                <div class="card cat">
+                    <div class="icon">🥁</div>
+                    <div>
+                        <h3>Trống & Gõ</h3>
+                        <div class="muted">Drumset • Cajon • Cymbals</div>
+                    </div>
+                </div>
+                <div class="card cat">
+                    <div class="icon">🎤</div>
+                    <div>
+                        <h3>Âm thanh & Phụ kiện</h3>
+                        <div class="muted">Mic • Mixer • Dây đàn</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured products -->
+    <section id="featured">
+        <div class="container">
+            <h2 class="section-title">Sản phẩm bán chạy</h2>
+            <div class="grid cols-3" style="margin-top:16px">
+                <div class="card product">
+                    <div class="thumb" aria-hidden="true"></div>
+                    <div>
+                        <h3>Acoustic Guitar A1</h3>
+                        <div class="muted">Gỗ spruce • Action thấp • Dễ chơi</div>
+                        <div style="margin-top:8px">
+                            <span class="price">3.990.000đ</span>
+                            <span class="tag">-15%</span>
+                        </div>
+                        <div style="margin-top:10px; display:flex; gap:10px">
+                            <button class="btn" onclick="toast('Đã thêm vào giỏ')">Thêm giỏ</button>
+                            <button class="btn ghost">Chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card product">
+                    <div class="thumb" aria-hidden="true"></div>
+                    <div>
+                        <h3>Digital Piano P-45</h3>
+                        <div class="muted">88 phím chuẩn • Touch response</div>
+                        <div style="margin-top:8px">
+                            <span class="price">12.490.000đ</span>
+                        </div>
+                        <div style="margin-top:10px; display:flex; gap:10px">
+                            <button class="btn" onclick="toast('Đã thêm vào giỏ')">Thêm giỏ</button>
+                            <button class="btn ghost">Chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card product">
+                    <div class="thumb" aria-hidden="true"></div>
+                    <div>
+                        <h3>Studio Mic M1</h3>
+                        <div class="muted">Cardioid • 20Hz–20kHz • USB-C</div>
+                        <div style="margin-top:8px">
+                            <span class="price">2.290.000đ</span>
+                        </div>
+                        <div style="margin-top:10px; display:flex; gap:10px">
+                            <button class="btn" onclick="toast('Đã thêm vào giỏ')">Thêm giỏ</button>
+                            <button class="btn ghost">Chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sep"></div>
+
+            <div class="card" style="display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap">
+                <div style="display:flex; gap:12px; align-items:center">
+                    <span class="pill">🚚 Giao nhanh 2h nội thành</span>
+                    <span class="pill">🛠️ Bảo dưỡng trọn đời</span>
+                    <span class="pill">🧾 Hoá đơn VAT</span>
+                </div>
+                <a class="btn" href="#contact">Nhận tư vấn miễn phí</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">Khách hàng nói gì</h2>
+            <div class="grid cols-3" style="margin-top:16px">
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">Guitar set up sẵn, action thấp, chơi đã tay. Nhân viên tư vấn rất có tâm.</p>
+                    <div class="muted">— Minh Anh</div>
+                </div>
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">Piano giao nhanh đúng hẹn, tặng kèm ghế và tai nghe, đáng tiền.</p>
+                    <div class="muted">— Tuấn Kiệt</div>
+                </div>
+                <div class="card">
+                    <div class="stars">★★★★☆</div>
+                    <p class="quote">Mic thu âm ổn cho podcast, giá hợp lý, cài đặt đơn giản.</p>
+                    <div class="muted">— Ngọc Hà</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter / Contact -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Nhận ưu đãi & tư vấn</h2>
+            <p class="muted">Đăng ký email để nhận voucher và các tip luyện nhạc mỗi tuần.</p>
+            <form class="newsletter" onsubmit="event.preventDefault(); toast('Cảm ơn bạn đã đăng ký!'); this.reset();">
+                <input class="input" type="email" required placeholder="Nhập email của bạn" />
+                <button class="btn" type="submit">Đăng ký</button>
+            </form>
+
+            <div class="sep"></div>
+
+            <div class="grid cols-3">
+                <div class="card">
+                    <h3>📍 Cửa hàng</h3>
+                    <p class="muted">Số 123, Quận Cầu Giấy, Hà Nội</p>
+                </div>
+                <div class="card">
+                    <h3>☎️ Liên hệ</h3>
+                    <p class="muted">0369 000 999 • support@harmonymusic.vn</p>
+                </div>
+                <div class="card">
+                    <h3>🕒 Giờ mở cửa</h3>
+                    <p class="muted">Thứ 2–CN: 9:00–21:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container foot">
+        <div class="brand" style="gap:10px">
+            <div class="logo"><span>♫</span></div>
+            © Harmony Music Store
+        </div>
+        <div class="links">
+            <a class="pill" href="#">Chính sách bảo hành</a>
+            <a class="pill" href="#">Vận chuyển & Đổi trả</a>
+            <a class="pill" href="#">Liên hệ</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Tiny toast -->
+<div id="toast" style="position:fixed; left:50%; bottom:26px; transform:translateX(-50%); background:#111827; color:#e5e7eb; padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.12); box-shadow:var(--shadow-soft); display:none; z-index:50"></div>
+
+<script>
+    function toast(msg){
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.style.display = 'block';
+        clearTimeout(window.__t);
+        window.__t = setTimeout(()=>{ el.style.display='none' }, 1900);
+    }
+    function closeMenu(){
+        const m = document.querySelector('.mobile-menu');
+        if(m) m.classList.remove('open');
+    }
+</script>
+</body>
+</html>
