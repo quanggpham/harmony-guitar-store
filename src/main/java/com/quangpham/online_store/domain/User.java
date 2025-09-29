@@ -1,14 +1,31 @@
 package com.quangpham.online_store.domain;
 
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String email;
     private String password;
     private String fullName;
     private String address;
     private String phone;
+    private String avatar;
+
+//  nhieu user co 1 role
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 
     public long getId() {
         return id;
